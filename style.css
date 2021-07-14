@@ -1,5 +1,7 @@
 :root {
   --boxColor: #0ff7;
+  --rotateSpeed: 30s;
+  --bounceSpeed: 5s;
 }
 
 body {
@@ -8,6 +10,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -25,6 +28,22 @@ body {
   position: relative;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  -webkit-animation: sceneRotate var(--rotateSpeed) infinite linear;
+          animation: sceneRotate var(--rotateSpeed) infinite linear;
+}
+
+@-webkit-keyframes sceneRotate {
+  to {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
+}
+
+@keyframes sceneRotate {
+  to {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
 }
 
 .ball {
@@ -36,6 +55,29 @@ body {
   bottom: 1em;
   left: -0.5em;
   background-image: radial-gradient(circle at top, lightblue, #000);
+  animation: ballBounce var(--bounceSpeed) infinite ease-out, sceneRotate var(--rotateSpeed) infinite linear reverse;
+}
+
+@-webkit-keyframes ballBounce {
+  0%, 100% {
+    bottom: 0.3em;
+  }
+  50% {
+    bottom: 3em;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+}
+
+@keyframes ballBounce {
+  0%, 100% {
+    bottom: 0.3em;
+  }
+  50% {
+    bottom: 3em;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
 }
 
 .ballShadow {
@@ -43,14 +85,62 @@ body {
   width: 100%;
   height: 100%;
   background-image: radial-gradient(#0007, #0000 50%);
+  -webkit-animation: ballShadow var(--bounceSpeed) infinite ease-out;
+          animation: ballShadow var(--bounceSpeed) infinite ease-out;
+}
+
+@-webkit-keyframes ballShadow {
+  0%, 8%, 93.5%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    opacity: 0.5;
+  }
+}
+
+@keyframes ballShadow {
+  0%, 8%, 93.5%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    opacity: 0.5;
+  }
 }
 
 .cube {
   width: 2em;
   height: 2em;
   position: absolute;
-  top: -1em;
+  bottom: -1em;
   left: -1em;
+  -webkit-animation: cubeHeight var(--bounceSpeed) infinite ease-in;
+          animation: cubeHeight var(--bounceSpeed) infinite ease-in;
+}
+
+@-webkit-keyframes cubeHeight {
+  0%, 100% {
+    height: 1.5em;
+  }
+  20%, 93.5% {
+    height: 2em;
+  }
+}
+
+@keyframes cubeHeight {
+  0%, 100% {
+    height: 1.5em;
+  }
+  20%, 93.5% {
+    height: 2em;
+  }
 }
 
 .cube .left, .cube .right, .cube .front, .cube .back {

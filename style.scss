@@ -1,10 +1,13 @@
 :root{
     --boxColor: #0ff7;
+    --rotateSpeed: 30s;
+    --bounceSpeed: 5s;
 }
 body{
     background-color: #000;
     min-height: 100vh;
     display: flex;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
     font-size: 75px;
@@ -14,6 +17,12 @@ body{
 .scene{
     position: relative;
     transform-style:preserve-3d ;
+    animation: sceneRotate var(--rotateSpeed) infinite linear;
+    @keyframes sceneRotate {
+        to {
+            transform: rotateY(360deg);
+        }
+    }
 }
 .ball{
     width: 1em;
@@ -27,6 +36,18 @@ body{
         circle at top , 
         lightblue, 
         #000);
+    animation: 
+    ballBounce var(--bounceSpeed) infinite ease-out,
+    sceneRotate var(--rotateSpeed) infinite linear reverse ;
+    @keyframes ballBounce {
+        0%,100% {
+            bottom: 0.3em;
+        }
+        50%{
+            bottom: 3em;
+            animation-timing-function: ease-in;
+        }
+    }
     
 }
 .ballShadow{
@@ -34,14 +55,28 @@ body{
     width: 100%;
     height: 100%;
     background-image: radial-gradient(#0007, #0000 50%);
+    animation: ballShadow var(--bounceSpeed) infinite ease-out;
+    @keyframes ballShadow {
+        0%, 8%, 93.5%, 100% {
+            transform: scale(1); opacity: 1;
+        }
+        50%{
+            transform: scale(2); opacity: 0.5;
+        }
+    }
 }
 .cube{
     width: 2em;
     height: 2em;
     
     position: absolute;
-    top: -1em;
+    bottom: -1em;
     left: -1em;
+    animation: cubeHeight var(--bounceSpeed) infinite ease-in;
+    @keyframes cubeHeight {
+        0%,100% {   height: 1.5em; }
+        20%, 93.5%{ height: 2em; }
+    }
     .left, .right, .front, .back{
         position: absolute;
         width: 100%;
