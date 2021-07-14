@@ -35,15 +35,74 @@ body {
   position: absolute;
   bottom: 1em;
   left: -0.5em;
+  background-image: radial-gradient(circle at top, lightblue, #000);
 }
 
-.box {
+.ballShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#0007, #0000 50%);
+}
+
+.cube {
   width: 2em;
   height: 2em;
-  background: var(--boxColor);
   position: absolute;
   top: -1em;
   left: -1em;
+}
+
+.cube .left, .cube .right, .cube .front, .cube .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--boxColor);
+  -webkit-box-shadow: 0 0 0.5em #000 inset;
+          box-shadow: 0 0 0.5em #000 inset;
+}
+
+.cube .front {
+  -webkit-transform: translateZ(1em);
+          transform: translateZ(1em);
+}
+
+.cube .right {
+  -webkit-transform: rotateY(90deg) translateZ(1em);
+          transform: rotateY(90deg) translateZ(1em);
+}
+
+.cube .back {
+  -webkit-transform: rotateY(180deg) translateZ(1em);
+          transform: rotateY(180deg) translateZ(1em);
+}
+
+.cube .left {
+  -webkit-transform: rotateY(270deg) translateZ(1em);
+          transform: rotateY(270deg) translateZ(1em);
+}
+
+.cube .top {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: var(--boxColor);
+  -webkit-transform: translateY(-50%) rotateX(90deg);
+          transform: translateY(-50%) rotateX(90deg);
+  -webkit-box-shadow: 0 0 0.5em #000 inset;
+          box-shadow: 0 0 0.5em #000 inset;
+}
+
+.cube .bottom {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: #0007;
+  bottom: 0;
+  -webkit-transform: translateY(50%) rotateX(90deg);
+          transform: translateY(50%) rotateX(90deg);
+  -webkit-box-shadow: 0 0 0.5em #000;
+          box-shadow: 0 0 0.5em #000;
 }
 
 .floor {
@@ -51,8 +110,8 @@ body {
   top: 1em;
   width: 15em;
   height: 15em;
-  background-image: repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg);
-  background-size: 1em 1em;
+  background-image: radial-gradient(#0000, #000 75%), repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg);
+  background-size: 100%, 1em 1em;
   -webkit-transform: translate(-50%, -50%) rotateX(90deg);
           transform: translate(-50%, -50%) rotateX(90deg);
 }
